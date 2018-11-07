@@ -22,8 +22,8 @@ http://localhost:3000/render/index/db/stream
 
 * in the defined path exists the file ./render/index.ejs
 * db is the database-name where the data is stored
-* stream is the meta-action to query the database [https://github.com/yamigr/pusudb#readme](Check API)
-* in the ejs-file the result can be handlet like <%= data => or <%= err =>
+* stream is the meta-action to query the database [https://www.npmjs.com/package/pusudb](https://www.npmjs.com/package/pusudb)
+* in the ejs-file the result can be accessed with <%= data => or <%= err =>
 
 ```js
 var Pusudb = require('pusudb')
