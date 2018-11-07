@@ -22,7 +22,7 @@ var Pusudb = require('pusudb')
 var pusudb = new Pusudb(3000, 'localhost')
 
 var Ejs = require('pusudb-use-ejs')
-var ejsFirst = new Ejs(__dirname + '/pages', ['/db'], { multipath : true }) 
+var ejsFirst = new Ejs(__dirname + '/pages', ['/db'], { multipath : true, api : '/api' }) //api-keyword in the url, where the db-query begins
 var ejsSecond = new Ejs(__dirname + '/public', ['/db'], { multipath : false })
 
 // new Static(< path to the ejs view-engine files >, < array of url's to escape when a get-request fired >)
