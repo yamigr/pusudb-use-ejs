@@ -1,12 +1,12 @@
 {
-  "name": "pusudb-use-static-file",
-  "version": "0.0.16",
-  "description": "A static-file middleware for the pusudb-framework.",
+  "name": "pusudb-use-ejs",
+  "version": "0.0.1",
+  "description": "A ejs middleware for the pusudb-framework.",
   "main": "lib/main.js",
   "scripts": {
     "test": "mocha"
   },
-  "homepage": "https://github.com/yamigr/pusudb-use-static-file#readme",
+  "homepage": "https://github.com/yamigr/pusudb-use-ejs#readme",
   "keywords": [
     "pusuDB",
     "pusudb",
@@ -16,15 +16,17 @@
     "web",
     "http",
     "html",
-    "static",
     "webpage",
     "IoT",
     "frameworks",
     "framework",
     "backend",
-    "static-file",
+    "ejs",
     "webservice",
-    "REST"
+    "REST",
+    "ejs",
+    "view",
+    "engine"
   ],
   "author": "yannick grund, https://github.com/yamigr",
   "license": "MIT",
