@@ -21,15 +21,15 @@ Create a ejs-instance and define the path where the ejs view-engine files are lo
 var Pusudb = require('pusudb')
 var pusudb = new Pusudb(3000, 'localhost')
 
-var Ejs = require('pusudb-use-ejs')
-var ejsFirst = new Ejs(__dirname + '/pages', ['/db'], { multipath : true, api : '/api' }) //api-keyword in the url, where the db-query begins
-var ejsSecond = new Ejs(__dirname + '/public', ['/db'], { multipath : false })
+var EjsMiddleware = require('pusudb-use-ejs')
+var ejsMiddlewareRender = new EjsMiddleware(__dirname + '/render', ['/static'], { multipath : true }) 
+var ejsMiddlewareEjs = new EjsMiddleware(__dirname + '/ejs', ['/static'], { multipath : false })
 
 // new Static(< path to the ejs view-engine files >, < array of url's to escape when a get-request fired >)
 // http://localhost:3000/index.html the main-path is not necessary in the url
 //add the middleware to the pusudb
-pusudb.use('http', ejsFirst.serve)
-pusudb.use('http', ejsSecond.serve)
+pusudb.use('http', ejsMiddlewareRender.serve)
+pusudb.use('http', ejsMiddlewareEjs.serve)
 
 pusudb.listen(function(port, host){
     console.log('pusudb listening:', port, host)
