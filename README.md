@@ -15,7 +15,15 @@ npm install pusudb-use-ejs --save
 
 ## Use
 
-Create a ejs-instance and define the path where the ejs view-engine files are located. Define some url's which should be escaped to put the request to the pusudb. When the ejs view-engine files are located in different folders, put option multipath to true. Please notice, that the filename should be unique, even when the folder is different.
+Create a ejs-instance and define the path where the ejs view-engine files are located. Define some url's which should be escaped to put the request direct to the pusudb. When the ejs view-engine files are located in different folders, put option multipath to true. Please notice, that the filename should be unique, even when the folder is different.
+
+Example:
+http://localhost:3000/render/index/db/stream
+
+* in the defined path exists the file ./render/index.ejs
+* db is the database-name where the data is stored
+* stream is the meta-action to query the database [https://github.com/yamigr/pusudb#readme](Check API)
+* in the ejs-file the result can be handlet like <%= data => or <%= err =>
 
 ```js
 var Pusudb = require('pusudb')
