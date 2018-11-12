@@ -30,9 +30,7 @@ var Pusudb = require('pusudb')
 var pusudb = new Pusudb(3000, 'localhost')
 
 var EjsMiddleware = require('pusudb-use-ejs')
-
-// new Static(< path to the ejs view-engine files >, < array of url's to escape when a get-request fired >, options)
-var ejsMiddlewareRender = new EjsMiddleware(__dirname + '/view', ['/static'], { multipath : true, prefix : '/render' }) 
+var ejsMiddlewareRender = new EjsMiddleware(__dirname + '/view', ['/static', /* blocked pathnames */], { prefix : '/path' }) 
 
 //add the middleware to the pusudb
 pusudb.use('http', ejsMiddlewareRender.serve)
