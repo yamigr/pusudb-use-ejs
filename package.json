@@ -1,6 +1,6 @@
 {
   "name": "pusudb-use-ejs",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A ejs middleware for the pusudb-framework.",
   "main": "lib/main.js",
   "scripts": {
