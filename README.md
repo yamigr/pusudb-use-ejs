@@ -2,9 +2,10 @@
 
 > Middleware to serve ejs view-engine files with the pusudb-framework.
 
-This middleware adds a file-handler to the pusudb-framework to render ejs view-engine files and sending it to the client.
+This middleware adds a file-handler to the pusudb-framework to render ejs view-engine files.
 
 Framework: [https://www.npmjs.com/package/pusudb](https://www.npmjs.com/package/pusudb)
+EJS: [ https://ejs.co/]( https://ejs.co/)
 
 <a name="installing"></a>
 ## Installing
@@ -15,13 +16,13 @@ npm install pusudb-use-ejs --save
 
 ## Use
 
-Create a ejs-instance and define the path where the ejs view-engine files are located. Define some url's which should be escaped to put the request direct to the pusudb.
+Define the path where the static-files are located. Define some url's which should be escaped. To define a url-prefix use the option prefix.
 
 ### Single query
-http://localhost:3000/ejs/index/db/stream then use the data in the ejs-file with <%= data => or <%= err =>
+http://localhost:3000/ejs/index/db/stream - in the ejs-file use the data like <%= data => or <%= err =>
 
 ### Multiple queries
-http://localhost:3000/ejs/index/api/select/list?nav=db,stream&user=db,get,key+person:AEYC8Y785 then use the data in the ejs-file with <%= nav => or <%= user => or your own keys.
+http://localhost:3000/ejs/index/api/select/list?nav=db,stream&user=db,get,key+person:AEYC8Y785  in the ejs-file use the data like <%= nav =>, <%= user => or your own keys.
 
 
 ```js
@@ -41,7 +42,10 @@ pusudb.listen(function(port, host){
 ```
 
 
-Filename: index.ejs, Path: __dirname + '/ejs', URL: http://localhost:3000/ejs/index. Check initialisation above.
+### HTML Example
+Filename: 'index.ejs'
+URL: 'http://localhost:3000/ejs/index/db/stream'
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -57,9 +61,7 @@ Filename: index.ejs, Path: __dirname + '/ejs', URL: http://localhost:3000/ejs/in
 <body>
 
   <p>Hello, world!</p>
-
-  <p><%= JSON.stringify(user) %></p>
-  <p><%= JSON.stringify(nav) %></p>
+  <p><%= JSON.stringify(data) %></p>
 
 </body>
 
