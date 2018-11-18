@@ -2,10 +2,9 @@
 
 > Middleware to serve ejs view-engine files with the pusudb-framework.
 
-This middleware adds a file-handler to the pusudb-framework to render ejs view-engine files.
+This middleware adds a file-handler to the pusudb-framework to render [ ejs-files ]( https://ejs.co/).
 
-Framework: [https://www.npmjs.com/package/pusudb](https://www.npmjs.com/package/pusudb)
-EJS: [ https://ejs.co/]( https://ejs.co/)
+Framework: [ pusudb ](https://www.npmjs.com/package/pusudb)
 
 <a name="installing"></a>
 ## Installing
@@ -15,19 +14,20 @@ npm install pusudb-use-ejs --save
 ```
 
 ## Use
-
-Define the path where the static-files are located. Define some url's which should be escaped. To define a url-prefix use the option prefix.
+Define the path where the ejs-files are located. Define some url's which should be escaped. To define a url-prefix use the option prefix.
 
 ### Single query
-http://localhost:3000/ejs/index/db/stream - in the ejs-file use the data like <%= data => or <%= err =>
+* http://localhost:3000/ejs/index/api/db/stream
+* <%= data => and <%= err => in ejs-file
 
 ### Multiple queries
-http://localhost:3000/ejs/index/api/select/list?nav=db,stream&user=db,get,key+person:AEYC8Y785  in the ejs-file use the data like <%= nav =>, <%= user => or your own keys.
+* http://localhost:3000/ejs/index/api/select/list?nav=db,stream&user=db,get,key+person:AEYC8Y785 
+* <%= nav => and <%= user => in ejs-file
 
 
 ```js
 var Pusudb = require('pusudb')
-var pusudb = new Pusudb(3000, 'localhost')
+var pusudb = new Pusudb(3000, 'localhost', { log : true, prefix : '/api'})
 
 var EjsMiddleware = require('pusudb-use-ejs')
 var ejsMiddlewareRender = new EjsMiddleware(__dirname + '/ejs', ['/static', /* blocked pathnames */], { prefix : '/ejs' }) 
@@ -43,8 +43,8 @@ pusudb.listen(function(port, host){
 
 
 ### HTML Example
-Filename: 'index.ejs'
-URL: 'http://localhost:3000/ejs/index/db/stream'
+URL: 'http://localhost:3000/[middleware-prefix]/[filename]/[pusudb-prefix]/[database-name]/[meta]'
+Example: 'http://localhost:3000/ejs/index/api/db/stream'
 
 ```html
 <!DOCTYPE html>
