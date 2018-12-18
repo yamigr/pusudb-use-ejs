@@ -14,7 +14,22 @@ npm install pusudb-use-ejs --save
 ```
 
 ## Use
-Define the path where the ejs-files are located. Define some url's which should be escaped. To define a url-prefix use the option prefix.
+Define the path where the ejs-files are located. Define some url's which should be escaped like the pure api-query. To define a url-prefix use the option prefix.
+
+```js
+var Pusudb = require('pusudb')
+var pusudb = new Pusudb(3000, 'localhost', { log : true, prefix : '/api'})
+
+var Render = require('pusudb-use-ejs')
+var render = new Render(__dirname + '/ejs', ['/static', /* blocked pathnames */], { prefix : '/ejs' }) 
+
+//add the middleware to the pusudb
+pusudb.use('http', render.serve)
+
+pusudb.listen(function(port, host){
+    console.log('pusudb listening:', port, host)
+})
+```
 
 ### Single query
 * http://localhost:3000/ejs/index/api/db/stream
@@ -24,23 +39,25 @@ Define the path where the ejs-files are located. Define some url's which should 
 * http://localhost:3000/ejs/index/api/select/list?nav=db,stream&user=db,get,key+person:AEYC8Y785 
 * <%= nav => and <%= user => in ejs-file
 
+### Add props in a middleware
+
+Add some props to req.docs and use the data in the ejs-file.
 
 ```js
-var Pusudb = require('pusudb')
-var pusudb = new Pusudb(3000, 'localhost', { log : true, prefix : '/api'})
-
-var EjsMiddleware = require('pusudb-use-ejs')
-var ejsMiddlewareRender = new EjsMiddleware(__dirname + '/ejs', ['/static', /* blocked pathnames */], { prefix : '/ejs' }) 
-
-//add the middleware to the pusudb
-pusudb.use('http', ejsMiddlewareRender.serve)
-
-
-pusudb.listen(function(port, host){
-    console.log('pusudb listening:', port, host)
+pusudb.useBefore('http', function(req, res, next){
+    if(!req.url.startsWith('/api')){
+        req.docs['lang'] = 'de'  // in ejs <%= lang %>
+        req.docs['title'] = 'PUSUDB-STUDIO' // in ejs <%= title %>
+        req.docs['scripts'] = [] // add some script paths and loop the array in ejs
+        req.docs['styles'] = []
+        req.docs['favicon'] = '/public/images/favicon.ico'  // in ejs <%= favicon %>
+        next() 
+    }
+    else{
+        next() 
+    }
 })
 ```
-
 
 ### HTML Example
 URL: 'http://localhost:3000/[middleware-prefix]/[filename]/[pusudb-prefix]/[database-name]/[meta]'
