@@ -2,7 +2,7 @@
 
 > Middleware to serve ejs view-engine files with the pusudb-framework.
 
-This middleware adds a file-handler to the pusudb-framework to render [ ejs-files ]( https://ejs.co/).
+Pusudb-filehandler to rendering [ ejs-files ]( https://ejs.co/).
 
 Framework: [ pusudb ](https://www.npmjs.com/package/pusudb)
 
@@ -17,11 +17,11 @@ npm install pusudb-use-ejs --save
 Define the path where the ejs-files are located. Define some url's which should be escaped like the pure api-query. To define a url-prefix use the option prefix.
 
 ```js
-var Pusudb = require('pusudb')
-var pusudb = new Pusudb(3000, 'localhost', { log : true, prefix : '/api'})
+const Pusudb = require('pusudb')
+const pusudb = new Pusudb(3000, 'localhost', { log : true, prefix : '/api'})
 
-var Render = require('pusudb-use-ejs')
-var render = new Render(__dirname + '/ejs', ['/static', /* blocked pathnames */], { prefix : '/ejs' }) 
+const Render = require('pusudb-use-ejs')
+const render = new Render(__dirname + '/ejs', ['/public', '/api'/*, blocked pathnames */], { prefix : '/ejs' /*, ejs-options, see ejs-docs */ }) 
 
 //add the middleware to the pusudb
 pusudb.use('http', render.serve)
@@ -31,16 +31,24 @@ pusudb.listen(function(port, host){
 })
 ```
 
-### Single query
+### Single query and use data in ejs
 * http://localhost:3000/ejs/index/api/db/stream
 * <%= data => and <%= err => in ejs-file
 
-### Multiple queries
+### Multiple queries and use data in ejs
 * http://localhost:3000/ejs/index/api/select/list?nav=db,stream&user=db,get,key+person:AEYC8Y785 
 * <%= nav => and <%= user => in ejs-file
 
-### Add props in a middleware
+### Add render-data in instance
+Reserved props are err, db, meta and data. Use the props in ejs-file like <%= title %>.
 
+```js
+render.setRenderData({ title : 'Page-Title', description : '42.'})
+
+console.log( render.getRenderData() )
+```
+
+### Add render-data in a pusudb-middleware
 Add some props to req.docs and use the data in the ejs-file.
 
 ```js
