@@ -43,9 +43,15 @@ pusudb.listen(function(port, host){
 Reserved props are err, db, meta and data. Use the props in ejs-file like <%= title %>.
 
 ```js
-render.setRenderData({ title : 'Page-Title', description : '42.'})
+// Set global data for any
+render.setRenderGlobalData({ title : 'Page-Title', description : '42.'})
+console.log( render.getRenderGlobalData() )
 
-console.log( render.getRenderData() )
+// Set data per file
+render.setRenderFileData('index.ejs', { content : 'Some content', page : 'Index'})
+render.setRenderFileData('contact.ejs', { address : '...', phone : '....'})
+console.log( render.getRenderFileData() )
+
 ```
 
 ### Add render-data in a pusudb-middleware
