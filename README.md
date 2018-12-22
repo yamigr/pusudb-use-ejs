@@ -60,11 +60,12 @@ Add some props to req.docs and use the data in the ejs-file.
 ```js
 pusudb.useBefore('http', function(req, res, next){
     if(!req.url.startsWith('/api')){
-        req.docs['lang'] = 'de'  // in ejs <%= lang %>
-        req.docs['title'] = 'PUSUDB-STUDIO' // in ejs <%= title %>
-        req.docs['scripts'] = [] // add some script paths and loop the array in ejs
-        req.docs['styles'] = []
-        req.docs['favicon'] = '/public/images/favicon.ico'  // in ejs <%= favicon %>
+        req.render['ticker'] = 'You can now use <%= ticker %> in the ejs-file'
+        req.render['lang'] = 'de'  // in ejs <%= lang %>
+        req.render['title'] = 'PUSUDB-STUDIO' // in ejs <%= title %>
+        req.render['scripts'] = [] // add some script paths and loop the array in ejs
+        req.render['styles'] = []
+        req.render['favicon'] = '/public/images/favicon.ico'  // in ejs <%= favicon %>
         next() 
     }
     else{
